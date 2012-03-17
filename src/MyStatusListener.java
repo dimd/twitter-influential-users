@@ -43,11 +43,10 @@ public class MyStatusListener implements StatusListener{
         }
         Long userId = status.getUser().getId();
         String userName = status.getUser().getScreenName();
-        int userFollowersCount = status.getUser().getFollowersCount();
-        int userFriendsCount = status.getUser().getFriendsCount();
+        Integer userFollowersCount = status.getUser().getFollowersCount();
+        Integer userFriendsCount = status.getUser().getFriendsCount();
         
         
-        //mc.insertTweet(tweetId, text, hashTexts, expandedUrls, timestamp.toString(), geol.getLatitude(), geol.getLongitude(), userId, userName, userFollowersCount, userFriendsCount);
         mc.insertTweet(tweetId, text, hashTexts, expandedUrls, timestamp, latitude, longitude, userId, userName, userFollowersCount, userFriendsCount);
         System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
         /*System.out.println("Tweet Id: " + tweetId);
