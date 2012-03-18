@@ -23,16 +23,17 @@ public class MongoCon {
 		}
 	}
 	
-	//public void insertTweet(Long tweetId, String text, ArrayList<String> hashTexts, ArrayList<String> urls, 
-//			String date, double longitude, double latitude, Long userId, String username, int userFollowersCount, int userFriendsCount) {
-	public void insertTweet(Long tweetId, String text, ArrayList<String> hashTexts, ArrayList<String> expandedUrls, 
-			Date timestamp, Double latitude, Double longitude,Long userId, String username, Integer userFollowersCount, Integer userFriendsCount) {
+	public void insertTweet(Long tweetId, String text, ArrayList<String> hashTexts, ArrayList<String> expandedUrls, ArrayList<Long> mentions, 
+			Date timestamp, Double latitude, Double longitude, Long sourceTweetId, Long userId, String username, 
+			Integer userFollowersCount, Integer userFriendsCount) {
+		
 		//tweet storing
 		BasicDBObject tweet = new BasicDBObject();
 		tweet.put("_id", tweetId);
 		tweet.put("text", text);
 		tweet.put("hashtags", hashTexts);
 		tweet.put("urls", expandedUrls);
+		tweet.put("mentions", mentions);
 		tweet.put("date", timestamp);
 		
 		BasicDBObject geo = new BasicDBObject();
@@ -41,6 +42,9 @@ public class MongoCon {
 		
 		tweet.put("geoLoc", geo);
 		tweet.put("user", userId);
+		if (sourceTweetId != null) {
+			tweet.put("sourceId", sourceTweetId);
+		}
 		tweets.save(tweet);
 		
 		//user storing
