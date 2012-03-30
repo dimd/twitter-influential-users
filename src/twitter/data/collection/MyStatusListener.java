@@ -1,3 +1,5 @@
+package twitter.data.collection;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -44,7 +46,11 @@ public class MyStatusListener implements StatusListener{
         //Get urls. Convert urlEntity objects array to an arraylist of Strings containing just the (expanded) urls.
         urlEntities.addAll(Arrays.asList(status.getURLEntities()));
         for (URLEntity ue : urlEntities) {
-        	expandedUrls.add(ue.getExpandedURL().toString());
+        	try {
+        		expandedUrls.add(ue.getExpandedURL().toString());
+        	}catch (NullPointerException e){
+        		
+        	}
         }
         
         //Get mentions. Convert mentionEntity objects array to an arraylist of Longs containing just the ids of the users mentioned.
@@ -80,29 +86,6 @@ public class MyStatusListener implements StatusListener{
         //Pass the gathered information to the mongo connection handler for storing.
         mc.insertTweet(tweetId, text, hashTexts, expandedUrls, mentions, timestamp, latitude, longitude, 
         		sourceTweetId, userId, userName, userFollowersCount, userFriendsCount);
-        //System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
-        /*System.out.println("Tweet Id: " + tweetId);*/
-        //System.out.println("Text: " + text);
-        /*System.out.println("Hashtags: ");
-        for (String h : hashTexts) {
-        	System.out.print(h + ", ");
-        }
-        System.out.println("Urls: ");
-        for (URLEntity ue : urlEntities) {
-        	System.out.print(ue.getExpandedURL());
-        }
-        System.out.println();
-        System.out.println("Created at: " + timestamp.toLocaleString());
-        try {
-        	System.out.println("Geolocation: " + geol.getLatitude() + ", " + geol.getLongitude());
-        } catch (NullPointerException e){
-        	System.out.println("No geo information.");
-        }
-        System.out.println("UserId: " + userId);
-        System.out.println("User name: " + userName);
-        System.out.println("User Followers Count: " + userFollowersCount);
-        System.out.println("User Friends Count: " + userFriendsCount);
-        System.out.println();*/
 	}
 
 	@Override

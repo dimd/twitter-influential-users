@@ -1,3 +1,5 @@
+package twitter.data.collection;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -7,7 +9,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-public class TweetStreamFirstAttempt {
+public class TwitterStreamListener {
 	/**
      * Main entry of this application.
      *

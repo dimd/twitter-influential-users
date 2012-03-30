@@ -1,3 +1,4 @@
+package twitter.data.collection;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.ArrayList;
